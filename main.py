@@ -1,6 +1,7 @@
 import pandas as pd
 import csv
 from datetime import datetime
+from data_entry import get_date, get_amount, get_category, get_description
 
 class CSV:
     CSV_FILE = 'finance_data.csv'
@@ -33,6 +34,18 @@ class CSV:
             writer.writerow(new_entry)
         print("Entry added successfully!")
 
-#tests
-CSV.initialize_csv()
-CSV.add_entry("2023-08-01", 1000, "Salary", "Monthly salary")
+# data collection function from the input helper functions
+def add():
+    CSV.initialize_csv()
+    date = get_date(
+        "Enter the date (DD-MM-YYYY) or enter for today's date: ", 
+        allow_default=True,
+    )
+    amount = get_amount()
+    category = get_category()
+    description = get_description()
+    CSV.add_entry(date, amount, category, description)
+
+
+# Test
+add()
