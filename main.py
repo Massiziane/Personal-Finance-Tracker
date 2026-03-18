@@ -1,7 +1,9 @@
 import pandas as pd
 import csv
+import time 
 from datetime import datetime
 from data_entry import get_date, get_amount, get_category, get_description
+
 
 
 class CSV:
@@ -51,6 +53,7 @@ class CSV:
         if filtered_df.empty:
             print("No transactions found in the specified date range.")
         else:
+            print("------------------------")
             print(
                 f"Transactions from {start_date.strftime(CSV.FORMAT)} to {end_date.strftime(CSV.FORMAT)}:"
                 )
@@ -82,7 +85,29 @@ def add():
     description = get_description()
     CSV.add_entry(date, amount, category, description)
 
+# launch the main menu and handle user input
+def main():
+    while True:
+        print("\nPersonal Finance Tracker")
+        print("------------------------")
+        print("1. Add a new transaction")
+        print("2. View transactions by date range")
+        print("3. Exit")
+        choice = input("Enter your choice (1/2/3): ")
+        if choice == "1": 
+            add()
+        elif choice == "2":
+            start_date = get_date("Enter the start date (DD-MM-YYYY): ")
+            end_date = get_date("Enter the end date (DD-MM-YYYY): ")
+            df = CSV.get_transactions(start_date, end_date)
+        elif choice == "3":
+            print("Exiting", end="", flush=True)
+            for i in range(3, 0, -1):
+                print(".", end="", flush=True)
+                time.sleep(1)
+            break
+        else:
+            print("Invalid choice. Please try again.")
 
-# Test
-CSV.get_transactions("01-08-2023", "17-03-2026")
-add()
+if __name__ == "__main__": 
+    main()
