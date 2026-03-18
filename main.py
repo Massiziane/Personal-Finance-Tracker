@@ -3,7 +3,7 @@ import csv
 import time 
 from datetime import datetime
 from data_entry import get_date, get_amount, get_category, get_description
-
+import matplotlib.pyplot as plt
 
 
 class CSV:
@@ -85,6 +85,39 @@ def add():
     description = get_description()
     CSV.add_entry(date, amount, category, description)
 
+# matplotlib visualization function
+def plot_transactions(df):
+    df['date'] = pd.to_datetime(df['date'])
+    df.set_index('date', inplace=True) # Set the date column as the index for resampling
+
+    income_df = (
+        df[df['category'] == 'Income']['amount']
+        .resample('D') # Resample by day and sum the amounts for each day
+        .sum() # Sum the amounts for each day to get total income per day
+    )
+
+    expense_df = (
+        df[df['category'] == 'Expense']['amount']
+        .resample('D')
+        .sum()
+    )
+
+    # Fill missing days with 0
+    income_df = income_df.fillna(0)
+    expense_df = expense_df.fillna(0)
+
+    plt.figure(figsize=(10, 5)) 
+    plt.plot(income_df.index, income_df, label='Income', color='g')
+    plt.plot(expense_df.index, expense_df, label='Expense', color='r')
+
+    plt.xlabel('Date') 
+    plt.ylabel('Amount ($)')
+    plt.title('Income and Expenses Over Time') 
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
+
 # launch the main menu and handle user input
 def main():
     while True:
@@ -100,6 +133,8 @@ def main():
             start_date = get_date("Enter the start date (DD-MM-YYYY): ")
             end_date = get_date("Enter the end date (DD-MM-YYYY): ")
             df = CSV.get_transactions(start_date, end_date)
+            if input("Would you like to visualize the transactions? (y/n): ").lower() == 'y':
+                plot_transactions(df)
         elif choice == "3":
             print("Exiting", end="", flush=True)
             for i in range(3, 0, -1):

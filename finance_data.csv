@@ -1,4 +1,21 @@
 date,amount,category,description
-01-08-2023,1000,Salary,Monthly salary
-17-03-2026,25.55,Expense,Breakfast
-19-07-2025,3000.0,Income,Salary
+21-07-2025,45.20,Expense,Groceries
+22-07-2025,120.00,Expense,Electric bill
+23-07-2025,15.75,Expense,Coffee
+24-07-2025,200.00,Expense,Shopping
+25-07-2025,1500.00,Income,Freelance project
+26-07-2025,60.00,Expense,Transport
+27-07-2025,80.00,Expense,Restaurant
+28-07-2025,220.00,Expense,Internet bill
+29-07-2025,500.00,Income,Bonus
+30-07-2025,35.00,Expense,Gas
+31-07-2025,90.00,Expense,Utilities
+01-08-2025,1000.00,Income,Salary
+02-08-2025,25.00,Expense,Snacks
+03-08-2025,300.00,Expense,Clothes
+04-08-2025,75.00,Expense,Subscriptions
+05-08-2025,2000.00,Income,Side hustle
+06-08-2025,40.00,Expense,Taxi
+07-08-2025,110.00,Expense,Groceries
+08-08-2025,60.00,Expense,Dining out
+09-08-2025,400.00,Expense,Electronics
